@@ -65,7 +65,7 @@ class App extends React.Component {
   removeTrack(track) {
     let curTracks = this.state.playlistTracks;
 
-    curTracks = curTracks.filter(savedTrack => savedTrack.id === track.id);
+    curTracks = curTracks.filter(savedTrack => savedTrack.id !== track.id);
 
     this.setState({playlistTracks: curTracks});
   }
