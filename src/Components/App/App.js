@@ -8,6 +8,7 @@ import Playlist from '../Playlist/Playlist';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       searchResults: [
         {
@@ -45,6 +46,19 @@ class App extends React.Component {
         }
       ]
     }
+
+    this.addTrack = this.addTrack.bind(this);
+  }
+
+  addTrack(track) {
+    let curTracks = this.state.playlistTracks;
+
+    if (curTracks.find(savedTrack => savedTrack.id === track.id)) {
+      return;
+    }
+
+    curTracks.push(track);
+    this.setState({playlistTracks: curTracks});
   }
 
   render() {
@@ -54,7 +68,7 @@ class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} />
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
             <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
           </div>
         </div>
